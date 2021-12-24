@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	int number;
+	int m;
+	int container[100] = {0,};
+	int max=0;
+
+
+	int testSume = 0;
+	
+
+	scanf_s("%d %d", &number, &m);
+
+	for (int i = 0; i < number; i++)
+	{
+		scanf_s("%d", &container[i]);
+	}
+
+	for (int j = 0; j < number; j++)
+	{
+		for (int k = j+1; k < number; k++)
+		{
+			for (int q = k+1; q < number; q++)
+			{
+				testSume = container[j] + container[k] + container[q];
+
+				if (testSume <= m && max< testSume)
+				{
+					max = testSume;
+				}
+				
+			}
+		}
+	}
+	
+	printf("%d", max);
+	return 0;
+}

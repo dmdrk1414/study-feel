@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main(void)
+{
+    int input;
+    while  (scanf("%c", &input)!= 0)
+    {
+        printf("%c", input);
+    }
+
+    return 0;
+}

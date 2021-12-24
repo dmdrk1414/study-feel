@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+int main()
+{
+    int input;
+    scanf("%d", &input);
+    for (int i = 0; i < input; i++)
+    {
+        for (int j = 0; j < i + 1; j++)
+        {
+            printf("*");
+        }
+
+        for (int k = 0; k < 2 * input - 2 * (i + 1); k++)
+        {
+            printf(" ");
+        }
+
+        for (int n = 0; n < i + 1; n++)
+        {
+            printf("*");
+        }
+
+        printf("\n");
+    }
+
+    for (int q = 0; q < input - 1; q++)
+    {
+        for (int w = 0; w < input - (q + 1); w++)
+        {
+            printf("*");
+        }
+
+        for (int e = 0; e < 2 * (q + 1); e++)
+        {
+            printf(" ");
+        }
+
+        for (int w = 0; w < input - (q + 1); w++)
+        {
+            printf("*");
+        }
+
+        printf("\n");
+    }
+
+    return 0;
+}

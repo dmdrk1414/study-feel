@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main(void)
+{
+
+    int input_A, input_B, input_C;
+    while (scanf_s("%d %d %d", &input_A, &input_B, &input_C) != 0)
+    {
+        int squrA = input_A * input_A;
+        int squrB = input_B * input_B;
+        int squrC = input_C * input_C;
+
+        if (input_A == 0 && input_B == 0 && input_C == 0)
+        {
+            break;
+        }
+        else if (squrB == squrA + squrC)
+        {
+            printf("right\n");
+        }
+        else if (squrC == squrA + squrB)
+        {
+            printf("right\n");
+        }
+         else if (squrA == squrB + squrC)
+        {
+            printf("right\n");
+        }
+        else
+        {
+            printf("wrong\n");
+        }
+    }
+
+    return 0;
+}

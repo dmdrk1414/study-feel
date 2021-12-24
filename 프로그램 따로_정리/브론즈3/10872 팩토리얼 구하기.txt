@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main(void)
+{
+    int input;
+    int vlaue = 1;
+    scanf("%d", &input);
+
+    if (input == 0)
+    {
+        printf("1");
+    }
+    else
+    {
+        for (int i = 1; i < input + 1; i++)
+        {
+            vlaue = vlaue * i;
+        }
+
+        printf("%d", vlaue);
+    }
+}
+

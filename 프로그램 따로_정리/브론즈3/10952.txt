@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int main()
+{
+    int rowNumber, input_A, input_B, container[100], i = 0;
+    while (true)
+    {
+        scanf("%d %d", &input_A, &input_B);
+
+        if (input_A == 0 && input_B == 0)
+        {
+            break;
+        }
+        else
+        {
+            container[i] = input_A + input_B;
+            i++;
+        }
+    }
+    for (int j = 0; j < i; j++)
+    {
+        printf("%d\n", container[j]);
+    }
+
+    return 0;
+}

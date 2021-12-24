@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int main()
+{
+    int input;
+    int container[9] = {
+        0,
+    };
+    int value = 0;
+    int num;
+
+    for (int i = 0; i < 9; i++)
+    {
+        scanf_s("%d", &container[i]);
+
+        value = value > container[i] ? value : container[i];
+    }
+
+    for (int j = 0; j < 9; j++)
+    {
+        if (container[j] == value)
+            num = j + 1;
+        else
+            printf("");
+    }
+
+    printf("%d\n", value);
+    printf("%d\n", num);
+
+    /*for (int i = 0; i < 9; i++)
+    {
+        printf("%d", container[i]);
+    }*/
+
+    return 0;
+}

@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+int main()
+{
+    int a[5];
+    int hamber;
+    int baveragy;
+    int resulte;
+
+    for (int i = 0; i < 5; i++)
+    {
+        scanf("%d", &a[i]);
+    }
+    if (a[0] < a[1] )    
+        {
+        	if (a[0] < a[2])
+			{
+				hamber = a[0];
+			}
+			else
+        	{
+        		hamber = a[2];
+			}
+		}
+    else
+	{
+    	hamber = a[1];
+    		if (a[1] < a[2])
+        	    hamber = a[1];
+			else
+    		    hamber = a[2];
+	}
+	
+    if (a[3] < a[4])
+        baveragy = a[3];
+    else
+        baveragy = a[4];
+
+    resulte = hamber + baveragy - 50;
+
+    printf("%d", resulte);
+    return 0;
+}

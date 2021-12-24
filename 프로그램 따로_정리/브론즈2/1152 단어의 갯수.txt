@@ -1,0 +1,40 @@
+#include <stdio.h>
+
+int main()
+{
+	char container[1000000];
+	int length = 0;
+	int valueLen = 0;
+
+	scanf("%[^\n]s", container, 1000000);
+
+	for (int i = 0; container[i] != '\0'; i++)
+	{
+		length += 1;
+	}
+
+	if (length == 1)
+	{
+		if (container[0] == ' ')
+		{
+			printf("0\n");
+			return 0;
+		}
+	}
+
+	for (int i = 0; i < length - 1; i++)
+	{
+		if (container[i] == ' ')
+		{
+			valueLen++;
+		}
+	}
+
+	printf("%d", valueLen + 1);
+
+	return 0;
+}
+
+문자열 출력값이 참힘드네 %s을 하면 문자열 받고
+버퍼개념도알고
+숫자와 문자열 같이 쓰면 버퍼걸린다~~~

@@ -1,0 +1,29 @@
+#include stdio.h
+
+int main()
+{
+    int input;
+    int value = 1;
+    int result;
+    int container[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    for (int i = 0; i  3; i++)
+    {
+        scanf_s(%d, &input);
+        value = input;
+    }
+
+    for (int j = 0; value  0; j++)
+    {
+        result = value % 10;
+        container[result] = container[result] + 1;
+        value = value  10;
+    }
+
+    for (int k = 0; k  10; k++)
+    {
+        printf(%dn, container[k]);
+    }
+
+    return 0;
+}

@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main()
+{
+    int rowNumber;
+    int input_1, input_2;
+
+    scanf("%d", &rowNumber);
+
+    for (int i = 0; i < rowNumber; i++)
+    {
+        scanf("%d %d", &input_1, &input_2);
+        printf("%d\n", input_1 + input_2);
+    }
+
+    return 0;
+}

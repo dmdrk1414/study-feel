@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main()
+{
+    int a, b, c;
+    int mid;
+    scanf("%d %d %d", &a, &b, &c);
+
+    ((a <= b && b <= c) || (a >= b && b >= c)) ? mid = b : printf("");
+
+    ((b <= a && a <= c) || (b >= a && a >= c)) ? mid = a : printf("");
+
+    ((a <= c && c <= b) || (a >= c && c >= b)) ? mid = c : printf("");
+
+    printf("%d", mid);
+
+    return 0;
+}

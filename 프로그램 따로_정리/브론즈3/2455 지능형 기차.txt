@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+int main()
+{
+    int downStation[4];
+    int upStation[4];
+    int value[4];
+    int personValue[4];
+    int result = 0;
+    int station[3];
+    int stationNumber = 4;
+
+    for (int i = 0; i < stationNumber; i++)
+    {
+        scanf("%d %d", &downStation[i], &upStation[i]);
+    }
+
+    for (int j = 0; j < stationNumber; j++)
+    {
+        value[j] = upStation[j] - downStation[j];
+    }
+
+    personValue[0] = value[0] + value[1];
+    //personValue[1] = personValue[0] + value[2];
+    //personValue[2] = personValue[1] + value[3];
+    for (int w = 1; w < stationNumber - 1; w++)
+    {
+        personValue[w] = personValue[w - 1] + value[w + 1];
+    }
+
+    for (int q = 0; q < stationNumber - 1; q++)
+    {
+        result = result > personValue[q] ? result : personValue[q];
+    }
+
+    printf("%d", result);
+
+    return 0;
+}

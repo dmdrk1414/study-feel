@@ -1,0 +1,25 @@
+#include<stdio.h>
+
+int main(){
+   
+   int c[8];
+   int i;
+   
+   for(i=0;i<8;i++)
+   {
+      scanf("%d" , &c[i]);
+   }
+   
+   if(c[0] == 8 && c[1] == 7 && c[2] == 6 && c[3] == 5 && c[4] == 4 && c[5] == 3 && c[6] == 2 && c[7] == 1)
+   {
+      printf("descending");   
+   }
+   else if(c[0] == 1 && c[1] == 2 && c[2] == 3 && c[3] == 4 && c[4] == 5 && c[5] == 6 && c[6] == 7 && c[7] == 8)
+   {
+      printf("ascending");
+   }
+   else
+   {
+      printf("mixed");
+   }
+}

@@ -1,0 +1,24 @@
+#include <stdio.h>
+
+int main(void)
+{
+	int input;
+	scanf_s("%d", &input);
+	for (int i = 1; i < input + 1; i++)
+	{
+		for (int j = 0; j < i; j++)
+		{
+			printf("*");
+		}
+		printf("\n");
+	}
+
+	for (int k = 0; k < input -1; k++)
+	{
+		for (int n = 0; n < input - 1 - k; n++)
+		{
+			printf("*");
+		}
+		printf("\n");
+	}
+}

@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main()
+{
+    int input, container[100];
+    int inputContainer_A[100], inputContainer_B[100];
+    int input_A, input_B;
+    scanf("%d", &input);
+
+    int i;
+    while (i < input)
+    {
+        scanf("%d %d", &input_A, &input_B);
+        container[i] = input_A + input_B;
+        inputContainer_A[i] = input_A;
+        inputContainer_B[i] = input_B;
+        i++;
+    }
+    for (int j = 0; j < i; j++)
+    {
+        printf("Case #%d: %d + %d = %d\n", j + 1, inputContainer_A[j], inputContainer_B[j], container[j]);
+    }
+
+    return 0;
+}

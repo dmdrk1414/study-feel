@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+int main(){
+	int array[10] = {3,2,4,6,7,5,8,9,10,1};
+	int min;
+	int temp;
+	int index;
+	
+	for	(int i = 0; i < 10 ; i++){
+		
+		min = 9999;
+		for	(int j = i ; j < 10 ; j++){
+			if(min > array[j]){
+				min = array[j];
+				index = j;
+			}
+		}
+		
+		temp = array[i];
+		array[i] = array[index];
+		array[index] = temp;
+	}
+	
+	for	(int i = 0; i < 10 ; i++){
+		printf("%d", array[i]);
+	}
+}
+1 2 3 4 5 6 7 8 9 10
+배열 한값을 뽑아서  그값을 최솟값을 한다. 그리고 최솟값을을 
+
+ex 
+
+쵯솟값을 데려와서 첫번재로 정렬을한다.

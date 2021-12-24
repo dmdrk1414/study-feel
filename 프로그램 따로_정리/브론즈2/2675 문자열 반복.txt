@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	int input;
+
+	scanf("%d", &input);
+
+	for (int i = 0; i < input; i++)
+	{
+		int wantNumber = 0;
+		char wantContainer[100];
+		scanf("%d", &wantNumber);
+		scanf("%s", wantContainer, 100);
+
+		for (int j = 0; j < strlen(wantContainer); j++)      여기에서 5 asd 는 aaasssddd  인풋과 문자의 숫자의 ? 나열??  (ㅁㄹ 지금은 그래)
+		{
+			for (int i = 0; i < wantNumber; i++)
+			{
+				printf("%c", wantContainer[j]);
+			}
+		}
+
+		printf("\n");
+	}
+
+	return 0;
+}
+
+

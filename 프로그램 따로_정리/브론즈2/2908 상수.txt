@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	int input_1;
+	int input_2;
+
+	int revInput_1;
+	int revInput_2;
+
+	int result;
+
+	scanf_s("%d %d", &input_1, &input_2);
+
+	// 321
+	revInput_1 = (input_1 / 100) + (input_1 / 10 % 10 * 10) + (input_1 % 10 * 100);
+	revInput_2 = (input_2 / 100) + (input_2 / 10 % 10 * 10) + (input_2 % 10 * 100);
+
+	result = revInput_1 > revInput_2 ? revInput_1 : revInput_2;
+
+	printf("%d", result);
+}
+
+
+#include <stdio.h>
+
+int main(){
+   
+   int a,b,c,d;
+   int w,x,y,z;
+   
+   scanf("%d %d" , &a, &w);
+   
+   b = a / 100;
+   c = (a % 100)/10;
+   d = (a % 100)%10;
+   
+   x = w / 100;
+   y = (w % 100)/10;
+   z = (w % 100)%10;
+   
+   if(z<d)
+   {
+      printf("%d%d%d" , d,c,b);
+   }
+   else if(z>d)
+   {
+      printf("%d%d%d" , z,y,x);
+   }
+   else
+   {
+      if(y>c)
+      {
+         printf("%d%d%d" , z,y,x);
+      }
+      else if(y<c)
+      {
+         printf("%d%d%d" , d,c,b);
+      }
+      else
+      {
+         if(b<x)
+         {
+            printf("%d%d%d" , z,y,x);
+         }
+         else
+            printf("%d%d%d" , d,c,b);
+      }
+   }
+}

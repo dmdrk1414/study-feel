@@ -1,0 +1,5 @@
+ZSH 환경창 들어가기
+
+vsc code .
+
+vsc code 들어가서 리모트를 켜라

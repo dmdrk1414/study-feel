@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+void swap(int *arr, int a, int b)
+{
+    int tmp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = tmp;
+}
+
+void quickSort(int *arr, int start, int end)
+{
+    int pivot = arr[start];
+    int left = start + 1;
+    int right = end;
+
+    while(left <= right){
+        while (arr[left] < pivot) {left++;}
+        while (arr[right] > pivot) {right--;}
+
+        if (left <= right) {swap(arr, left, right);}
+    }
+    
+    if(start < end){ //1개로 쪼개질때 까지
+        swap(arr, start, right);
+        
+        quickSort(arr, start, right-1);
+        quickSort(arr, right+1, end);
+    }
+    
+    return;
+}
+
+void outPut(int *arr, int len){
+    for(int i=0; i<len ; i++){
+        printf("[%d]", arr[i]);
+    }
+    printf("\n");
+}
+
+int main(void)
+{
+    int arr[7] = {5,3,7,6,2,1,4};
+    
+    outPut(arr,7);
+    
+    quickSort(arr, 0, 6);
+    
+    outPut(arr,7);
+    
+    return 0;
+}

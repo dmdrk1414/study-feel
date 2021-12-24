@@ -1,0 +1,14 @@
+#include <stdio.h>
+
+int main()
+{
+    int input_1, input_2;
+    scanf("%d %d", &input_1, &input_2);
+
+// (n-1) + (m-1) *n
+
+    int result = input_1 * input_2 -1;
+    printf("%d", result);
+
+    return 0;
+}

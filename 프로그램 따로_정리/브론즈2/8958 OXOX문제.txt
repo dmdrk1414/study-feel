@@ -1,0 +1,87 @@
+#include <stdio.h>
+int main()
+{
+	int input;
+	int add = 1;
+	char container[100];
+
+	scanf_s("%d", &input);
+
+	for (int i = 0; i < input; i++)
+	{
+		int sum = 0;
+		int length = 0;
+
+		scanf_s("%s", container, 100);
+
+		for (int j = 0; container[j] != '\0'; j++)
+		{
+			length += 1;
+		}
+
+		for (int k = 0; k < length; k++)
+		{
+			if (container[k] == 'O')
+			{
+				sum += add;
+				add += 1;
+			}
+			else
+			{
+				add = 1;
+			}
+		}
+		add = 1;
+		printf("%d\n", sum);
+	}
+
+	return 0;
+}
+
+c언어가 생각보다 빠르다.
+내친구는 java인데 43ms? 느림...
+쪼개는게 어렵네 문자열을...
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	int input;
+	int add = 1;
+	char container[100];
+
+	scanf_s("%d", &input);
+
+	for (int i = 0; i < input; i++)
+	{
+		int sum = 0;
+		int length = 0;
+
+		scanf_s("%s", container, 100);
+
+		length = strlen(container);
+
+		for (int k = 0; k < length; k++)
+		{
+			if (container[k] == 'O')
+			{
+				sum += add;
+				add += 1;
+			}
+			else
+			{
+				add = 1;
+			}
+		}
+		add = 1;
+		printf("%d\n", sum);
+	}
+
+	return 0;
+}
+
+ 문자열 로 길이, 
+처리속도가 빨라서 놀랐다, 이제 보니 0MS 다른언어는 200  40이상이다.
+확실히 C언어가 빠르긴 하다.
