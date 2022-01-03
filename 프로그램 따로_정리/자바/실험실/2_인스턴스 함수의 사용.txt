@@ -1,0 +1,15 @@
+class Print {
+    String instancetest = "인스턴스 변수 수정 전";
+    public void Callinstancetest() {
+        System.out.println(this.instancetest);
+    }
+}
+
+public class staticMethod {
+    public static void main(String[] args) {
+        Print instanceTest = new Print();
+        System.out.println(instanceTest.instancetest);
+        instanceTest.Callinstancetest();
+        System.out.println(instanceTest.instancetest);
+    }
+}

@@ -1,0 +1,35 @@
+class Print {
+    static String classtest = "클래스 테스트 수정 전";
+
+    public static void CallClass() {
+        System.out.println(classtest);
+    }
+
+    String instancetest = "인스턴스 변수 수정 전";
+
+    public void Callinstancetest(String test) {
+        this.instancetest = test;
+        System.out.println(this.instancetest);
+    }
+}
+
+public class staticMethod {
+    public static void main(String[] args) {
+        System.out.println(Print.classtest);
+        Print.CallClass();
+        Print.classtest = "클래스 테스트 수정 후";
+        Print.CallClass();
+
+        Print instanceTest = new Print();
+        System.out.println(instanceTest.instancetest);
+        instanceTest.Callinstancetest("인스턴스 테스트 수정");
+        System.out.println(instanceTest.instancetest);
+
+        System.out.println("");
+
+        Print instanceTest_2 = new Print();
+        System.out.println(instanceTest_2.instancetest);
+
+
+    }
+}
