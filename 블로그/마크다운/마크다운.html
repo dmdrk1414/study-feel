@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>마크다운.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+    <style>
+      /* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+      /*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+      body {
+        font-family: var(
+          --vscode-markdown-font-family,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe WPC",
+          "Segoe UI",
+          "Ubuntu",
+          "Droid Sans",
+          sans-serif
+        );
+        font-size: var(--vscode-markdown-font-size, 14px);
+        padding: 0 26px;
+        line-height: var(--vscode-markdown-line-height, 22px);
+        word-wrap: break-word;
+      }
+
+      #code-csp-warning {
+        position: fixed;
+        top: 0;
+        right: 0;
+        color: white;
+        margin: 16px;
+        text-align: center;
+        font-size: 12px;
+        font-family: sans-serif;
+        background-color: #444444;
+        cursor: pointer;
+        padding: 6px;
+        box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.25);
+      }
+
+      #code-csp-warning:hover {
+        text-decoration: none;
+        background-color: #007acc;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+      }
+
+      body.scrollBeyondLastLine {
+        margin-bottom: calc(100vh - 22px);
+      }
+
+      body.showEditorSelection .code-line {
+        position: relative;
+      }
+
+      body.showEditorSelection .code-active-line:before,
+      body.showEditorSelection .code-line:hover:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -12px;
+        height: 100%;
+      }
+
+      body.showEditorSelection li.code-active-line:before,
+      body.showEditorSelection li.code-line:hover:before {
+        left: -30px;
+      }
+
+      .vscode-light.showEditorSelection .code-active-line:before {
+        border-left: 3px solid rgba(0, 0, 0, 0.15);
+      }
+
+      .vscode-light.showEditorSelection .code-line:hover:before {
+        border-left: 3px solid rgba(0, 0, 0, 0.4);
+      }
+
+      .vscode-light.showEditorSelection .code-line .code-line:hover:before {
+        border-left: none;
+      }
+
+      .vscode-dark.showEditorSelection .code-active-line:before {
+        border-left: 3px solid rgba(255, 255, 255, 0.4);
+      }
+
+      .vscode-dark.showEditorSelection .code-line:hover:before {
+        border-left: 3px solid rgba(255, 255, 255, 0.6);
+      }
+
+      .vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+        border-left: none;
+      }
+
+      .vscode-high-contrast.showEditorSelection .code-active-line:before {
+        border-left: 3px solid rgba(255, 160, 0, 0.7);
+      }
+
+      .vscode-high-contrast.showEditorSelection .code-line:hover:before {
+        border-left: 3px solid rgba(255, 160, 0, 1);
+      }
+
+      .vscode-high-contrast.showEditorSelection
+        .code-line
+        .code-line:hover:before {
+        border-left: none;
+      }
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      a:focus,
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 1px solid -webkit-focus-ring-color;
+        outline-offset: -1px;
+      }
+
+      hr {
+        border: 0;
+        height: 2px;
+        border-bottom: 2px solid;
+      }
+
+      h1 {
+        padding-bottom: 0.3em;
+        line-height: 1.2;
+        border-bottom-width: 1px;
+        border-bottom-style: solid;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: normal;
+      }
+
+      table {
+        border-collapse: collapse;
+      }
+
+      table > thead > tr > th {
+        text-align: left;
+        border-bottom: 1px solid;
+      }
+
+      table > thead > tr > th,
+      table > thead > tr > td,
+      table > tbody > tr > th,
+      table > tbody > tr > td {
+        padding: 5px 10px;
+      }
+
+      table > tbody > tr + tr > td {
+        border-top: 1px solid;
+      }
+
+      blockquote {
+        margin: 0 7px 0 5px;
+        padding: 0 16px 0 10px;
+        border-left-width: 5px;
+        border-left-style: solid;
+      }
+
+      code {
+        font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New",
+          monospace, "Droid Sans Fallback";
+        font-size: 1em;
+        line-height: 1.357em;
+      }
+
+      body.wordWrap pre {
+        white-space: pre-wrap;
+      }
+
+      pre:not(.hljs),
+      pre.hljs code > div {
+        padding: 16px;
+        border-radius: 3px;
+        overflow: auto;
+      }
+
+      pre code {
+        color: var(--vscode-editor-foreground);
+        tab-size: 4;
+      }
+
+      /** Theming */
+
+      .vscode-light pre {
+        background-color: rgba(220, 220, 220, 0.4);
+      }
+
+      .vscode-dark pre {
+        background-color: rgba(10, 10, 10, 0.4);
+      }
+
+      .vscode-high-contrast pre {
+        background-color: rgb(0, 0, 0);
+      }
+
+      .vscode-high-contrast h1 {
+        border-color: rgb(0, 0, 0);
+      }
+
+      .vscode-light table > thead > tr > th {
+        border-color: rgba(0, 0, 0, 0.69);
+      }
+
+      .vscode-dark table > thead > tr > th {
+        border-color: rgba(255, 255, 255, 0.69);
+      }
+
+      .vscode-light h1,
+      .vscode-light hr,
+      .vscode-light table > tbody > tr + tr > td {
+        border-color: rgba(0, 0, 0, 0.18);
+      }
+
+      .vscode-dark h1,
+      .vscode-dark hr,
+      .vscode-dark table > tbody > tr + tr > td {
+        border-color: rgba(255, 255, 255, 0.18);
+      }
+    </style>
+
+    <style>
+      /* Tomorrow Theme */
+      /* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+      /* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+      /* Tomorrow Comment */
+      .hljs-comment,
+      .hljs-quote {
+        color: #8e908c;
+      }
+
+      /* Tomorrow Red */
+      .hljs-variable,
+      .hljs-template-variable,
+      .hljs-tag,
+      .hljs-name,
+      .hljs-selector-id,
+      .hljs-selector-class,
+      .hljs-regexp,
+      .hljs-deletion {
+        color: #c82829;
+      }
+
+      /* Tomorrow Orange */
+      .hljs-number,
+      .hljs-built_in,
+      .hljs-builtin-name,
+      .hljs-literal,
+      .hljs-type,
+      .hljs-params,
+      .hljs-meta,
+      .hljs-link {
+        color: #f5871f;
+      }
+
+      /* Tomorrow Yellow */
+      .hljs-attribute {
+        color: #eab700;
+      }
+
+      /* Tomorrow Green */
+      .hljs-string,
+      .hljs-symbol,
+      .hljs-bullet,
+      .hljs-addition {
+        color: #718c00;
+      }
+
+      /* Tomorrow Blue */
+      .hljs-title,
+      .hljs-section {
+        color: #4271ae;
+      }
+
+      /* Tomorrow Purple */
+      .hljs-keyword,
+      .hljs-selector-tag {
+        color: #8959a8;
+      }
+
+      .hljs {
+        display: block;
+        overflow-x: auto;
+        color: #4d4d4c;
+        padding: 0.5em;
+      }
+
+      .hljs-emphasis {
+        font-style: italic;
+      }
+
+      .hljs-strong {
+        font-weight: bold;
+      }
+    </style>
+
+    <style>
+      /*
+ * Markdown PDF CSS
+ */
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI",
+          "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+        padding: 0 12px;
+      }
+
+      pre {
+        background-color: #f8f8f8;
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+      }
+
+      pre:not(.hljs) {
+        padding: 23px;
+        line-height: 19px;
+      }
+
+      blockquote {
+        background: rgba(127, 127, 127, 0.1);
+        border-color: rgba(0, 122, 204, 0.5);
+      }
+
+      .emoji {
+        height: 1.4em;
+      }
+
+      code {
+        font-size: 14px;
+        line-height: 19px;
+      }
+
+      /* for inline code */
+      :not(pre):not(.hljs) > code {
+        color: #c9ae75; /* Change the old color so it seems less like an error */
+        font-size: inherit;
+      }
+
+      /* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+      .page {
+        page-break-after: always;
+      }
+    </style>
+
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+  </head>
+  <body>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme:
+          document.body.classList.contains("vscode-dark") ||
+          document.body.classList.contains("vscode-high-contrast")
+            ? "dark"
+            : "default",
+      });
+    </script>
+    <center style="font-size: x-large">
+      이번에는 마크다운에 대해서 공부했어요 <br />
+      블로그를 마크다운으로 쓰는 법도 알았는데<br />
+      처음부터 할껄 그랬어요<br />
+    </center>
+    <hr />
+    <h1 id="%EA%B0%80%EC%9A%B4%EB%8D%B0-%EC%A0%95%EB%A0%ACbr">
+      가운데 정렬<br />
+    </h1>
+    <h2 id="centercenterbr">
+      <code>&lt;center&gt;&lt;/center&gt;</code><br />
+    </h2>
+    <h1 id="%EC%A0%9C%EB%AA%A9heder">제목(Heder)</h1>
+    <h1 id="%EC%A0%9C%EB%AA%A9-1">제목 1</h1>
+    <h2 id="%EC%A0%9C%EB%AA%A9-2">제목 2</h2>
+    <h3 id="%EC%A0%9C%EB%AA%A9-3">제목 3</h3>
+    <h4 id="%EC%A0%9C%EB%AA%A9-4">제목 4</h4>
+    <h5 id="%EC%A0%9C%EB%AA%A9-5">제목 5</h5>
+    <h6 id="%EC%A0%9C%EB%AA%A9-6">제목 6</h6>
+    <hr />
+    <h1 id="%EB%AC%B8%EC%9E%A5paragraph">문장(Paragraph)</h1>
+    <p>
+      동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화
+      삼천리 화려 강산 대한 사람 대한으로 길이 보전하세.
+    </p>
+    <hr />
+    <h1 id="%EC%A4%84%EB%B0%94%EA%BF%88line-breaks">줄바꿈(Line Breaks)</h1>
+    <p>
+      동해물과 백두산이 마르고 닳도록<br />
+      하느님이 보우하사 우리나라 만세<br />
+      무궁화 삼천리 화려 강산<br />
+      대한 사람 대한으로 길이 보전하세.
+    </p>
+    <hr />
+    <h1 id="%EA%B0%95%EC%A1%B0emphasis">강조(Emphasis)</h1>
+    <p>
+      <em>이텔릭</em><br />
+      <strong>두껍게</strong><br />
+      <strong><em>이텔릭 + 두껍게</em></strong
+      ><br />
+      <s>취소선</s><br />
+      <u>밑줄</u><br />
+    </p>
+    <hr />
+    <h1 id="%EB%AA%A9%EB%A1%9Dlist">목록(List)</h1>
+    <p><strong>순서가 필요한 목록</strong><br /></p>
+    <ol>
+      <li>순서가 필요한 목록</li>
+      <li>순서가 필요한 목록</li>
+      <li>
+        순서가 필요한 목록
+        <ol>
+          <li>순서가 필요한 목록</li>
+          <li>
+            순서가 필요한 목록
+            <ol>
+              <li>순서가 필요한 목록</li>
+              <li>순서가 필요한 목록</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>순서가 필요한 목록</li>
+    </ol>
+    <p><strong>순서가 필요하지 않는 목록</strong><br /></p>
+    <ul>
+      <li>순서가 필요하지 않은 목록</li>
+      <li>
+        순서가 필요하지 않은 목록
+        <ul>
+          <li>순서가 필요하지 않은 목록</li>
+          <li>
+            순서가 필요하지 않은 목록
+            <ul>
+              <li>순서가 필요하지 않은 목록</li>
+              <li>순서가 필요하지 않은 목록</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>순서가 필요하지 않은 목록</li>
+    </ul>
+    <hr />
+    <h1 id="%EB%A7%81%ED%81%AClinks">링크(Links)</h1>
+    <p>
+      <a href="https://google.com">GOOGLE</a> <br />
+      <a href="https://naver.com">NAVER</a>
+    </p>
+    <hr />
+    <h1 id="%EC%9D%B4%EB%AF%B8%EC%A7%80images">이미지(Images)</h1>
+    <p>
+      <img
+        src="https://blogpfthumb-phinf.pstatic.net/MjAyMjAxMTJfMjkg/MDAxNjQxOTY3NDI3ODYy.YN31oWldMiwa3CJl43QQwGG4j2VP4gHUmMwv1Op7YCQg.2N6yBdw1UB9lANLkOzE8eJ549LtG9_Eq-qiYPYsJnN4g.PNG.dmdrk1414/SmartSelectImage_2021-11-03-17-20-01.png/SmartSelectImage_2021-11-03-17-20-01.png?type=w161"
+        alt="블로그 사진"
+      />
+    </p>
+    <p>
+      <a href="https://blog.naver.com/dmdrk1414"
+        ><img
+          src="https://blogpfthumb-phinf.pstatic.net/MjAyMjAxMTJfMjkg/MDAxNjQxOTY3NDI3ODYy.YN31oWldMiwa3CJl43QQwGG4j2VP4gHUmMwv1Op7YCQg.2N6yBdw1UB9lANLkOzE8eJ549LtG9_Eq-qiYPYsJnN4g.PNG.dmdrk1414/SmartSelectImage_2021-11-03-17-20-01.png/SmartSelectImage_2021-11-03-17-20-01.png?type=w161"
+          alt="내블로그 사진"
+      /></a>
+    </p>
+    <hr />
+    <h1 id="%EC%9D%B8%EC%9A%A9%EB%AC%B8blockquote">인용문(BlockQuote)</h1>
+    <blockquote>
+      <p>
+        남의 말이나 글에서 직접 또는 간접으로 따온 문장. <br />
+        (네이버 국어 사전)
+      </p>
+    </blockquote>
+    <blockquote>
+      <p>인용문을 작성하세요!</p>
+      <blockquote>
+        <p>중첨된 인용문</p>
+        <blockquote>
+          <p>
+            중중첩된 인용문 1<br />
+            중중첩된 인용문 2<br />
+            중중첩된 인용문 3<br />
+          </p>
+        </blockquote>
+      </blockquote>
+    </blockquote>
+    <hr />
+    <h1
+      id="%EC%9D%B8%EB%9D%BC%EC%9D%B8inline-%EC%BD%94%EB%93%9C-%EA%B0%95%EC%A1%B0"
+    >
+      인라인(inline) 코드 강조
+    </h1>
+    <p>
+      css에서 <code>background</code> 혹은
+      <code>background-image</code> 속성으로<br />
+      요소에 배경 이미지를 삽입할 수 있습니다.
+    </p>
+    <pre
+      class="hljs"
+    ><code><div><span class="hljs-built_in">console</span>.log(<span class="hljs-string">"마크다운으로 javascript 하기"</span>);
+</div></code></pre>
+    <pre
+      class="hljs"
+    ><code><div><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>마크다운으로 html 사용하기<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+</div></code></pre>
+    <hr />
+    <h1 id="%ED%91%9Ctable--%EC%A0%95%EB%A0%AC%ED%95%98%EB%8A%94-%EB%B2%95">
+      표(Table) + 정렬하는 법
+    </h1>
+    <p>position 속성</p>
+    <table>
+      <thead>
+        <tr>
+          <th>값</th>
+          <th style="text-align: center">의미</th>
+          <th style="text-align: right">기본값</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>static</td>
+          <td style="text-align: center">기준 없음</td>
+          <td style="text-align: right">O</td>
+        </tr>
+        <tr>
+          <td>relative</td>
+          <td style="text-align: center">요소 자신</td>
+          <td style="text-align: right">X</td>
+        </tr>
+        <tr>
+          <td>absolute</td>
+          <td style="text-align: center">위치 상 부모 요소</td>
+          <td style="text-align: right">X</td>
+        </tr>
+        <tr>
+          <td>fixed</td>
+          <td style="text-align: center">뷰포트</td>
+          <td style="text-align: right">X</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <h1 id="%EC%9B%90%EC%8B%9C-html-raw-html">원시 HTML (Raw HTML)</h1>
+    <p>
+      동해물과 <u>백두산이</u> 마르고 닳도록<br />
+      하느님이 보우하사 우리나라 만세<br />
+    </p>
+    <h1 id="%EC%88%98%ED%8F%89%EC%84%A0-horizontal-rule">
+      수평선 (Horizontal Rule)
+    </h1>
+    <hr />
+  </body>
+</html>
