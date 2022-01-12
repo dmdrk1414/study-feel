@@ -1,12 +1,8 @@
-var user = {
-    name : 'park_seung_chan',
-    age : 27,
-    getName: function (){
-        return this.name;
-    }
-}
+// js
 
-console.log(user.getName());
+let 파이 = 3.141592;
+console.log(파이);
 
-const test = user.getName();
-console.log(test);
+const str = 파이.toFixed(2);
+console.log(str);
+console.log(typeof str);

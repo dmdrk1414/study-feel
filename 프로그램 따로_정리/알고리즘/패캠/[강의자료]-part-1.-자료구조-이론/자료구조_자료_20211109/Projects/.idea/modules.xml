@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CH11_HASHTABLE/CH11_HASHTABLE.iml" filepath="$PROJECT_DIR$/CH11_HASHTABLE/CH11_HASHTABLE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CH12_TREE/CH12_TREE.iml" filepath="$PROJECT_DIR$/CH12_TREE/CH12_TREE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CH13_HEAP/CH13_HEAP.iml" filepath="$PROJECT_DIR$/CH13_HEAP/CH13_HEAP.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CH7_QUEUE/CH7_QUEUE.iml" filepath="$PROJECT_DIR$/CH7_QUEUE/CH7_QUEUE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CH8_STACK/CH8_STACK.iml" filepath="$PROJECT_DIR$/CH8_STACK/CH8_STACK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CH9_LINKEDLIST/CH9_LINKEDLIST.iml" filepath="$PROJECT_DIR$/CH9_LINKEDLIST/CH9_LINKEDLIST.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Projects.iml" filepath="$PROJECT_DIR$/.idea/Projects.iml" />
+    </modules>
+  </component>
+</project>
