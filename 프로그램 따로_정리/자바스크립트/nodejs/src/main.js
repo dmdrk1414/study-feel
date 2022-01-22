@@ -21,7 +21,7 @@ function sleep(duration, callback) {
     callback();
   }, duration);
 }
-
+//
 // 요청이 오면 실행되는 콜백 함수
 const server = http.createServer((req, res) => {
   res.statusCode = 200; // 응답 상태값 설정
