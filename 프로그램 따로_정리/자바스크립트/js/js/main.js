@@ -1,16 +1,12 @@
-import axios from "axios";
+const http = require("http");
 
-function fetchMovies() {
-  axios.get("https://www.omdbapi.com/?apikey=7035c60c&s=frozen").then((res) => {
-    console.log(res);
-    const h1El = document.querySelector("h1");
-    const imgEl = document.querySelector("img");
-    const classDecription = document.querySelector(".decription");
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.end("HELLO");
+});
 
-    h1El.textContent = res.data.Search[0].Title;
-    imgEl.src = res.data.Search[0].Poster;
-    classDecription.textContent = res.data.Search[0].Year;
-  });
-}
+const PORT = 3000;
 
-fetchMovies();
+server.listen(PORT, () => {
+  console.log("작은 서버를 만들어 보자!!!", PORT);
+});
