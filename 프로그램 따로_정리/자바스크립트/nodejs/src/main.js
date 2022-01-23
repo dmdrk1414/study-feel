@@ -9,7 +9,7 @@
  * 블로그 포스팅 서비스
  * - 로컬 파일을 데이터베이스로 환용할 예정 (JSON)
  * - 인증 로직은 넣지 않는다. (유저에 의심하지 않는다)
- * - RESTful API을 사용한다. test와 사람이 보기 편하다
+ * - RESTful API을 사용한다. test와 사람이 보기 편하다hh
  */
 
 const http = require("http"); // 노드 모듈을 가져온다
@@ -21,7 +21,14 @@ function sleep(duration, callback) {
     callback();
   }, duration);
 }
-//
+
+/**
+ * Post = 글쓰기
+ * GET /posts = 전체 글을 보는법
+ * GET /posts:id = 특정 글을 보는법 (해당 id)
+ * POST /posts = 글을 올리기
+ */
+
 // 요청이 오면 실행되는 콜백 함수
 const server = http.createServer((req, res) => {
   res.statusCode = 200; // 응답 상태값 설정

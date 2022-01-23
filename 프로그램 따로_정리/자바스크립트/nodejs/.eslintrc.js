@@ -1,3 +1,5 @@
+// eskubt 설정
+
 module.exports = {
   extends: ["airbnb-base", "plugin:node/recommended", "prettier"],
   root: true,
