@@ -69,25 +69,27 @@ public class NodeMgmtBasicSearch {
                 CASE_2.1 현제의 Node의 data < data
                 CASE_2.2 현제의 Node의 data > data
          */
-        if (this.head != null) {
-            Node findNode = this.head;
-//            순환
-            while (findNode != null){
-//                현제의 node의 value이 == data 이면 현제의 node return
-                if (findNode.value == data){
-                    return findNode;
-                } else if (data < findNode.value) {
-                    findNode = findNode.left;
-                } else {
-                    findNode = findNode.right;
-                }
 
-            }
+        if (this.head == null) {
             return null;
         } else {
-            return null;
+            // this.head != null
+            Node findNode = this.head;
+            // 순환
+            while (findNode != null) {
+//                현제의 node의 value이 == data 이면 현제의 node return
+                if (data == findNode.value) {
+                    return findNode;
+                } else if (data > findNode.value) {
+                    findNode = findNode.right;
+                } else {
+                    findNode = findNode.left;
+                }
+            }
         }
+        return null;
     }
+
 
     public static void main(String[] args) {
         NodeMgmtBasicSearch testNode = new NodeMgmtBasicSearch();
@@ -101,8 +103,13 @@ public class NodeMgmtBasicSearch {
         testNode.insertNode(2);
         testNode.insertNode(1);
 
-        System.out.println(testNode.search(4));
-        System.out.println(testNode.head.left);
+        NodeMgmtBasicSearch test = new NodeMgmtBasicSearch();
+        test.insertNode(2);
+        test.insertNode(3);
+        test.insertNode(4);
+        test.insertNode(6);
+
+        System.out.println(test.search(3).right.value);
         /*
         System.out.println(testNode.head.value);
 

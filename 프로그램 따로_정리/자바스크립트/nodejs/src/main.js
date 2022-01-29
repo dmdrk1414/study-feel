@@ -12,43 +12,15 @@
  * - RESTful API을 사용한다. test와 사람이 보기 편하다hh
  */
 
-const http = require("http"); // 노드 모듈을 가져온다
+const http = require("http");
 
-const PORT = 4000; // 사용할 서버 포트
+const PORT = 4000;
 
-function sleep(duration, callback) {
-  setInterval(() => {
-    callback();
-  }, duration);
-}
-
-/**
- * Post = 글쓰기
- * GET /posts = 전체 글을 보는법
- * GET /posts:id = 특정 글을 보는법 (해당 id)
- * POST /posts = 글을 올리기
- */
-
-// 요청이 오면 실행되는 콜백 함수
 const server = http.createServer((req, res) => {
-  res.statusCode = 200; // 응답 상태값 설정
-  res.end("Hello!"); // 응답 데이터 전송
+  res.writeHead(200, { "content-Type": "text/html" });
+  res.end("plz help me ");
 });
 
-// 서버를 요청 대기 상태로 만든다
-try {
-  server.listen(PORT, () => {
-    // 요청 대기가 완료되면 실행되는 콜백 함수
-    // 터미널에 로그를 기록한다
-    console.log(`The server is listening at port: ${PORT}`);
-  });
-} catch (error) {
-  sleep(
-    500,
-    server.listen(PORT, () => {
-      // 요청 대기가 완료되면 실행되는 콜백 함수
-      // 터미널에 로그를 기록한다
-      console.log(`The server is listening at port: ${PORT}`);
-    })
-  );
-}
+server.listen(PORT, () => {
+  console.log("listen");
+});
