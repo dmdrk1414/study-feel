@@ -176,36 +176,98 @@ public class NodeMgmtBasicSearchRemove {
                 }
                 return true;
             }
-            // Case3 현제의 Node의 자식이 2개가 있으면?
-            // Case3_1 value > parents.value
-//                    Case3_1_1 child Node 중에 작은것을 current Node에 붙인다.
-            // Case3_2 value < parents.value
-//                    Case3_2_1 child Node 중에 작은것을 current Node에 붙인다.
-            else if (currNode.left != null && currNode.right != null) {
-                System.out.println("CASE_3");
-                Node leftNode = currNode;
 
-                if (value > currParentNode.value) {
-                    while (leftNode.left != null) {
-                        leftNode = leftNode.left;
+            // Case3-1 : 삭제할 Node 가 child Node를 두개 가지고 있고,
+            // 삭제할 Node 가 부모 Node 의 왼쪽에 있는 경우
+            else{
+                System.out.println("CASE_3");
+                // 삭제할 node가 parentNode의 왼쪽에 있을때
+                if (value < currParentNode.value) {
+                    // 현제노드의 right의 가장 작은 값을 가져야되다.
+                    // 가장작은 값의 자식노드를 가지고있을 케이스가 있으니 연결해줄수있는 changeParentNode가 있어야된다.
+                    Node changeNode = currNode.right;
+                    Node changeParentNode = currNode.right;
+
+                    if (changeNode.left == null && changeNode.right == null){
+                        currParentNode.right = changeNode;
+                        changeNode.left = currNode.left;
+                        currNode = null;
+                        return true;
                     }
-//                    System.out.println("leftNode: " + leftNode.value);
-                    Node tempNode = currNode;
-                    currNode = leftNode;
-                    currParentNode.right = currNode;
-                    leftNode = null;
-                } else { // value < ParentNode.value
-                    while (leftNode.left != null) {
-                        leftNode = leftNode.left;
+
+                    while (changeNode.left != null) {
+                        changeParentNode = changeNode;
+                        changeNode = changeNode.left;
                     }
-                    Node tempNode = currNode;
-                    currNode = leftNode;
-                    currParentNode.left = currNode;
-                     leftNode = null;
+                    // 여기 까지 실행 되면 changeNode 에는 삭제할 Node이 오른쪽 Node중에서
+                    // 가장 작은 값을 가진 Node가 있음
+
+                    // Case 3-1-1: changeNode 의 Child Node가 없을 떼
+                    // Case 3-1-2: changeNode 의 오른쪽 Child Node 가 있을 때
+
+                    if (changeNode.right != null) {
+                        //Case 3-1-2 : changeNode 의 child Node가 있을때 changeNode.right가 있을때
+                        changeParentNode.left = changeNode.right;
+                    } else {
+                        // Case 3-1-1 : changeNode 의 Child Node 가 없을때때
+                        changeParentNode.left = null;
+                    }
+
+                    // currParentNode 의 왼쪽(left) child Node 에 , 삭제할 Node (currNode) 의 오른쪽 자식중에,
+                    // 가장 작은 값을 가진 changeNode 를 currParentNode.left 에 연결한다.
+                    currParentNode.left = changeNode;
+
+                    // currParentNode 의 왼쪽 Child Node 가 현재, changeNode 이고,
+                    // changeNode 의 왼쪽/오른쪽 Child Node 를 모두, 삭제할 currNode 의
+                    // 기존 왼쪽/오른쪽 Node 로 변경
+                    changeNode.right = currNode.right;
+                    changeNode.left = currNode.left;
+
+                    currNode = null;
                 }
+                // Case 3-2 : 삭제할 Node 가 Child Node 를 두개 가지고 있고,
+                // (삭제할 Node 가 부모 Node 의 오른쪽) currNode.value > currParentNode.value
+                else {
+                    Node changeNode = currNode.right;
+                    Node changeParentNode = changeNode.right;
+
+                    if (changeNode.left == null && changeNode.right == null){
+                        currParentNode.right = changeNode;
+                        changeNode.left = currNode.left;
+                        currNode = null;
+                        return true;
+                    }
+
+                    while (changeNode.left != null ){
+                        changeParentNode = changeNode;
+                        changeNode = changeNode.left;
+                    }
+                    // 여기까지 실행되면, changeNode 에는 삭제할 Node 의 오른쪽 Node 중에서,
+                    // 가장 작은 값을 가진 Node 가 들어있음
+
+                    if (changeNode.right != null) {
+                        // Case 3-2-2 : changeNode 의 오른쪽 Child Node 가 있을 때
+                        changeParentNode.left = changeNode.right;
+                    } else {
+                        // Case 3-2-1: changeNode 의 Child Node 가 없을때
+                        changeParentNode.left = null;
+                    }
+
+                    // currParentNode 의 오른쪽 Child Node 에, 삭제할 Node 의 오른쪽 자식중,
+                    // 가장 작은 값을 가진 changeNode 를 연결
+                    currParentNode.right = changeNode;
+
+                    // parentNode 의 왼쪽 Child Node 가 현재, changeNode 이고,
+                    // changeNode 의 왼쪽/오른쪽 Child Node 를 모두, 삭제할 currNode 의
+                    // 기존 왼쪽/오른쪽 Node 로 변경
+                    changeNode.right = currNode.right;
+                    changeNode.left = currNode.left;
+
+                    currNode = null;
+                }
+                return  true;
             }
         }
-        return true;
     }
 
 
@@ -244,6 +306,7 @@ public class NodeMgmtBasicSearchRemove {
         System.out.println(testNode.head.left.left.left.left.value);  // 1
          */
 
+        /*
         NodeMgmtBasicSearchRemove testTwo = new NodeMgmtBasicSearchRemove();
         testTwo.insertNode(50);
         testTwo.insertNode(40);
@@ -265,6 +328,23 @@ public class NodeMgmtBasicSearchRemove {
         System.out.println("현제 노드 : " + testTwo.head.left.right.value);
         System.out.println("현제 노드 left : " + testTwo.head.left.right.left.value);
 //        System.out.println("마지막 left : "+ testTwo.head.left.right.left.left.value);
+*/
 
+        NodeMgmtBasicSearchRemove test = new NodeMgmtBasicSearchRemove();
+        test.insertNode(10);
+        test.insertNode(15);
+        test.insertNode(13);
+        test.insertNode(11);
+        test.insertNode(14);
+        test.insertNode(18);
+        test.insertNode(16);
+        test.insertNode(19);
+        test.insertNode(17);
+        test.insertNode(7);
+        test.insertNode(8);
+        test.insertNode(6);
+
+        test.delete(18);
+        System.out.println(test.head.right.right.right.value);
     }
 }

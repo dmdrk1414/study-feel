@@ -8029,7 +8029,10 @@ http.METHODS = [
 },{"./lib/request":"node_modules/stream-http/lib/request.js","./lib/response":"node_modules/stream-http/lib/response.js","xtend":"node_modules/xtend/immutable.js","builtin-status-codes":"node_modules/builtin-status-codes/browser.js","url":"node_modules/url/url.js"}],"js/main.js":[function(require,module,exports) {
 var http = require("http");
 
-var server = http.createServer(function (req, res) {});
+var server = http.createServer(function (req, res) {
+  res.statusCode = 200;
+  res.end("HELLO");
+});
 var PORT = 3000;
 server.listen(PORT, function () {
   console.log("작은 서버를 만들어 보자!!!", PORT);
@@ -8062,7 +8065,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61205" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33665" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
