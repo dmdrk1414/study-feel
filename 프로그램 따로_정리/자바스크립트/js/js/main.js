@@ -1,12 +1,23 @@
-const http = require("http");
+function test() {
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      console.log("시간함수");
+      res();
+    }, 1000);
+  });
+}
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.end("HELLO");
-});
+function nomal() {
+  setTimeout(() => {
+    console.log("nomal funtion");
+  }, 1000);
+}
 
-const PORT = 3000;
+async function testCall() {
+  console.log("test");
+  await test();
+  nomal();
+  console.log("test after");
+}
 
-server.listen(PORT, () => {
-  console.log("작은 서버를 만들어 보자!!!", PORT);
-});
+testCall();
