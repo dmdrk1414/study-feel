@@ -9,24 +9,11 @@ public class HeapBasick {
     public HeapBasick(Integer data) {
         heapArray = new ArrayList<Integer>();
 
-        heapArray.add(null);
+        heapArray.add(null); // 배열의 "0" 가 null 이니 조심
         heapArray.add(data);
     }
 
     // move_up 은 처음에 들어간 inserted_idx로 비교를한다
-    public boolean move_up(Integer inserted_idx) {
-        if (inserted_idx <= 1) { // inserted_idx == 1 이면 root 라는 뜻이다.
-            return false;
-        } else {
-            Integer parent_idx = inserted_idx / 2;
-            if (this.heapArray.get(inserted_idx) > this.heapArray.get(parent_idx)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
     public boolean insert(Integer data) {
         // inserted_idx 비교할 배열의 덱스값
         Integer inserted_idx, parent_idx; // 부모와 자식의 index을 알기위한 변수
@@ -35,13 +22,13 @@ public class HeapBasick {
         if (this.heapArray == null) {
             this.heapArray = new ArrayList<Integer>();
 
-            this.heapArray.add(null);
-            this.heapArray.add(data);
-            return true;
-        }
+          this.heapArray.add(null);
+          this.heapArray.add(data);
+          return true;
+      }
 
-        this.heapArray.add(data);
-        inserted_idx = this.heapArray.size() - 1;
+      this.heapArray.add(data);
+      inserted_idx = this.heapArray.size() - 1;
 
         // move_up 은 처음에 들어간 inserted_idx로 비교를한다
         while (this.move_up(inserted_idx)) {
@@ -55,23 +42,19 @@ public class HeapBasick {
         return true;
     }
 
-//    public boolean delete() {
-//        if (this.heapArray == null) {
-//            return false;
-//        } else {
-//            Integer inserted_idx = this.heapArray.size() - 1;
-//            System.out.println("insert_id : " + inserted_idx);
-//            Collections.swap(this.heapArray, 1, inserted_idx);
-//            this.heapArray.remove((int) inserted_idx);
-//
-//            while (true) {
-//                Integer parentes_idx = inserted_idx / 2;
-//
-//
-//            }
-//        }
-//        return false;
-//    }
+    public boolean move_up(Integer inserted_idx) {
+        // 만약에 inserted_idx 가 1이면   parented_idx가 0이라는 뜻인데 그건 null이다.
+        if (inserted_idx <= 1) { // inserted_idx == 1 이면 root 라는 뜻이다.
+            return false;
+        } else {
+            Integer parent_idx = inserted_idx / 2;
+            if (this.heapArray.get(inserted_idx) > this.heapArray.get(parent_idx)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
     public static void main(String[] args) {
         HeapBasick test = new HeapBasick(20);
@@ -81,30 +64,20 @@ public class HeapBasick {
         test.insert(4);
         test.insert(8);
         System.out.println(test.heapArray);
-//        System.out.println(test.delete());
-//        System.out.println(test.heapArray);
 
-//        HeapBasick test = new HeapBasick(1);
-//        test.insert(2);
-//        test.insert(3);
-//        test.insert(4);
-//        test.insert(5);
+
+//        int insertData[] = {1, 2, 3, 4, 5};
+//        System.out.println("insertDataNumber : " + insertData.length);
+////      [ 0 , 1, 2, 3, 4, 5  ]   6 개
 //
-//        for (int i = 0; i < 8; i++) {
-//            System.out.println(test.heapArray.get(i));
+//        MakeHeapBasick testArray = new MakeHeapBasick(insertData[0]);
+//        System.out.println(testArray.HeapArray + " 추가 : " + insertData[0]);
+//
+//        for (int i = 1; i < insertData.length; i++) {
+//            testArray.insertdata(insertData[i]);
+//            System.out.println(testArray.HeapArray + " 추가 : " + insertData[i]);
 //        }
-
-//        ArrayList<Integer> testSwap = new  ArrayList<Integer>();
-//        testSwap.add(1);
-//        testSwap.add(2);
-//        testSwap.add(3);
-//        testSwap.add(4);
-//        testSwap.add(5);
-//        System.out.println(testSwap);
 //
-//        Collections.swap(testSwap, 1,2);
-//        System.out.println(testSwap);
-
-
+//        System.out.println("HeapArray Size : " + testArray.HeapArray.size());
     }
 }
