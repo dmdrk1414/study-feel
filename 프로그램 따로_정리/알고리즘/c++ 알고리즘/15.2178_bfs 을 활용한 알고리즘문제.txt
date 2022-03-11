@@ -1,0 +1,331 @@
+#include<iostream>
+#include<queue>
+#include<vector>
+#include<stdio.h>
+
+using namespace std;
+int input_y, input_x, count=0; // y축 x축 인풋 변수
+int array[101][101]; // 길찾기 그래프가 들어가는 배열
+int checkArray[101][101]; // 들어간곳을 체크하는 배열
+
+queue<int> qx, qy; // queue의 x좌표 y좌표을 나타낸다.
+bool checFunc(int y, int x) {
+	// 초과 미만 벽을 표시를 해준다
+	if (y > input_y || x > input_x || y <= 0 || x <= 0)
+		return false;
+	// 0 이면 못간다.    -1을 하기싫으면 입력갑에 j, k = 1을 넣어라
+	if (array[y - 1][x - 1] == 0)
+		return false;
+	// 체크 배열에 true 이면 안된다.
+	if (checkArray[y - 1][x - 1])
+		return false;
+	return true;
+}
+
+int main() {
+	scanf("%d %d", &input_y, &input_x);
+
+	for (int j = 0; j < input_y; j++) {
+		for (int k = 0; k < input_x; k++) {
+			scanf("%1d", &array[j][k]); // 1. 붙어있는 수 나눠서 저장
+		}
+	}
+
+	// queue에 첫번째인수를 넣는다 왜냐하면 1.1이기때문
+	queue<int> qc;
+	qx.push(1);
+	qy.push(1);
+	qc.push(1);
+	while (!qx.empty()) {
+		// 및에서 queue에 넣었던 데이터를 변수에 저장
+		int x_number = qx.front(), y_number = qy.front(), cc = qc.front();
+		printf("y %d  x %d  \n", y_number, x_number);
+		printf("%d\n", cc);
+		// queue에서 꺼내야 다음 queue의 데이터를 활용이 가능하다.
+		qx.pop();
+		qy.pop();
+		qc.pop();
+
+		// y 와 x 의 값을 체크배열에 넣는다
+		// 만약에 체크배열에 있으면 다음껄 체크
+		if (checkArray[y_number - 1][x_number - 1]) {
+			continue;
+		}
+		checkArray[y_number - 1][x_number - 1] = true;
+
+		// y의 값과 == 입력한 y의 값이 같으면 && x의 값과 == 입력한 x의 값이 같으면;
+		// 끝났다는 의미
+		if (y_number == input_y && x_number == input_x) {
+			count = cc; // 만약에 빨리 도착한 경우를 count에 넣는다
+			break;
+		}
+		//상
+		if (checFunc(y_number - 1, x_number)) {
+			// 윗쪽으로 가면 y-1 값을 queue에 저장
+			qy.push(y_number - 1);
+			// x값도 저장을 한다 왜냐하면 윗쪽코드에서 x값을 이미 뺐기 때문에 안넣으면
+			qx.push(x_number);
+			qc.push(cc+1);
+			printf("상\n");
+//			printf("%d\n", qc.front());
+		}
+		//하
+		if (checFunc(y_number + 1, x_number)) {
+			// 및쪽으로 가면 y+1값을 queue에 저장
+			qy.push(y_number + 1);
+			qx.push(x_number);
+			qc.push(cc+1);
+			printf("하\n");
+//			printf("%d\n", qc.front());
+//			printf("시작\n");
+		}
+		//좌
+		if (checFunc(y_number, x_number - 1)) {
+			qy.push(y_number);
+			qx.push(x_number - 1);
+			qc.push(cc+1);
+			printf("좌\n");
+//			printf("%d\n", qc.front());
+		}
+		//우
+		if (checFunc(y_number, x_number + 1)) {
+			qy.push(y_number);
+			qx.push(x_number + 1);
+			qc.push(cc+1);
+			printf("우\n");
+//			printf("%d\n", qc.front());
+		}
+	}
+	printf("%d", count);
+
+	return 0;
+}
+
+
+
+다른풀이
+
+#include<iostream>
+#include<queue>
+#include<vector>
+#include<stdio.h>
+
+using namespace std;
+int input_y, input_x, count=0; // y축 x축 인풋 변수
+int array[101][101]; // 길찾기 그래프가 들어가는 배열
+int checkArray[101][101]; // 들어간곳을 체크하는 배열
+
+queue<int> qx, qy; // queue의 x좌표 y좌표을 나타낸다.
+bool checFunc(int y, int x) {
+	// 초과 미만 벽을 표시를 해준다
+	if (y > input_y || x > input_x || y <= 0 || x <= 0)
+		return false;
+	// 0 이면 못간다.    -1을 하기싫으면 입력갑에 j, k = 1을 넣어라
+	if (array[y][x] == 0)
+		return false;
+	// 체크 배열에 true 이면 안된다.
+	if (checkArray[y ][x])
+		return false;
+	return true;
+}
+
+int main() {
+	scanf("%d %d", &input_y, &input_x);
+
+	// 1을 해준이유는 array(그래프를 받는)을 1부터 시작하기위해서
+	// checkArray 을 1부터 받기 위해서
+	for (int j = 1; j <= input_y; j++) {
+		for (int k = 1; k <= input_x; k++) {
+			scanf("%1d", &array[j][k]); // 1. 붙어있는 수 나눠서 저장
+		}
+	}
+
+	// queue에 첫번째인수를 넣는다 왜냐하면 (1.1)이기때문
+	queue<int> qc;
+	qx.push(1);
+	qy.push(1);
+	qc.push(1);
+	while (!qx.empty()) {
+		// 및에서 queue에 넣었던 데이터를 변수에 저장
+		int x_number = qx.front(), y_number = qy.front(), cc = qc.front();
+//		printf("y %d  x %d  \n", y_number, x_number);
+//		printf("%d\n", cc);
+		// queue에서 꺼내야 다음 queue의 데이터를 활용이 가능하다.
+		qx.pop();
+		qy.pop();
+		qc.pop();
+
+		// y 와 x 의 값을 체크배열에 넣는다
+		// 만약에 체크배열에 있으면 다음껄 체크
+		if (checkArray[y_number][x_number]) {
+			continue;
+		}
+		checkArray[y_number][x_number] = true;
+
+		// y의 값과 == 입력한 y의 값이 같으면 && x의 값과 == 입력한 x의 값이 같으면;
+		// 끝났다는 의미
+		if (y_number == input_y && x_number == input_x) {
+			count = cc; // 만약에 빨리 도착한 경우를 count에 넣는다
+			break;
+		}
+		//상
+		if (checFunc(y_number - 1, x_number)) {
+			// 윗쪽으로 가면 y-1 값을 queue에 저장
+			qy.push(y_number - 1);
+			// x값도 저장을 한다 왜냐하면 윗쪽코드에서 x값을 이미 뺐기 때문에 안넣으면
+			qx.push(x_number);
+			qc.push(cc+1);
+//			printf("상\n");
+//			printf("%d\n", qc.front());
+		}
+		//하
+		if (checFunc(y_number + 1, x_number)) {
+			// 및쪽으로 가면 y+1값을 queue에 저장
+			qy.push(y_number + 1);
+			qx.push(x_number);
+			qc.push(cc+1);
+//			printf("하\n");
+//			printf("%d\n", qc.front());
+//			printf("시작\n");
+		}
+		//좌
+		if (checFunc(y_number, x_number - 1)) {
+			qy.push(y_number);
+			qx.push(x_number - 1);
+			qc.push(cc+1);
+//			printf("좌\n");
+//			printf("%d\n", qc.front());
+		}
+		//우
+		if (checFunc(y_number, x_number + 1)) {
+			qy.push(y_number);
+			qx.push(x_number + 1);
+			qc.push(cc+1);
+//			printf("우\n");
+//			printf("%d\n", qc.front());
+		}
+	}
+	printf("%d", count);
+
+	return 0;
+}
+
+다른풀이
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <queue>
+
+using namespace std;
+
+int N, M;
+int map[100][100] = { 0 }; // 그래프가 들어간 배열
+bool visited[100][100];  // 체크를 해주는 배열
+int cnt[100][100] = { 0 };
+
+int dx[] = { 0, 1, 0, -1 }; //12시부터 시계방향 동서남북을 표시해주는 x, y값
+int dy[] = { -1, 0, 1, 0 };
+
+void bfs(int x, int y) {
+	visited[x][y] = true;
+	cnt[x][y]++;
+	queue<pair<int, int>> q; // pair을 이용해서 x, y값 받기
+	q.push( { x, y });
+	while (!q.empty()) {
+		int xx = q.front().first; // x좌표에 queue에 데이터 빼서 넣기
+		int yy = q.front().second; // y좌표에 queue에 데이터 빼서 넣기
+		q.pop(); // 마지막데이터는 빼서
+		for (int i = 0; i < 4; i++) { // 동서남북
+			int nx = xx + dx[i]; //  0 | 1 | 0 | -1 |
+			int ny = yy + dy[i]; // -1 | 0 | 1 |  0 | 을 넣는다
+
+			// 초과하거나 0에서 벗어나는 경우를 잡는다
+			// 또한 체크를 하는 과정에서 true가 아니면 잡는다
+			// 또한 map에서 1이 있는경우는 뺀다 (1인이유는 한번간곳이다.)
+			if (nx >= 0 && nx < N && ny >= 0 && ny < M && !visited[nx][ny]
+					&& map[nx][ny] == 1) {
+				visited[nx][ny] = true;
+				q.push( { nx, ny });
+				cnt[nx][ny] = cnt[xx][yy] + 1; // 이미 먼저간곳은 끝나니 카운터가 멈춘다.
+			}
+		}
+	}
+}
+int main(void) {
+	cin >> N >> M;
+
+	//입력
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			scanf("%1d", &map[i][j]);
+		}
+	}
+
+	//수행
+	bfs(0, 0);
+
+	//출력
+	// 마지막값 y , x 의 - 1 을해주면 마지막값이다.
+	cout << cnt[N - 1][M - 1];
+
+	return 0;
+}
+
+4 6
+101111
+101010
+101011
+111011
+15
+
+#include<iostream>
+#include<stdio.h>
+#include<queue>
+using namespace std;
+
+int M, N; // N == x , M == y;
+int counter;
+int countArr[101][101];
+int arr[101][101];
+int visite[101][101];
+int cx[4] = { -1, 0, 1, 0 };  // 좌 상 오 하
+int cy[4] = { 0, -1, 0, 1 };	// 좌 상 오 하
+int Tx, Ty, Nx, Ny;
+
+void search(int start_x, int start_y) {
+	queue<pair<int, int>> q;
+	q.push(make_pair(start_x, start_y));
+	visite[start_x][start_y] = true;
+	countArr[start_y][start_x]++;
+	while (!q.empty()) {
+		Nx = q.front().first;
+		 Ny = q.front().second;
+		q.pop();
+		for (int i = 0; i < 4; i++) {
+			Tx = Nx + cx[i];
+			Ty = Ny + cy[i];
+
+			if (Tx >= 0 && Tx < N && Ty >= 0 && Ty < M) { // N = x , M = y;
+				if (arr[Ty][Tx] == 1 && visite[Ty][Tx] == false) {
+					q.push(make_pair(Tx, Ty));
+					visite[Ty][Tx] = true;
+					countArr[Ty][Tx] = countArr[Ny][Nx] + 1;
+				}
+			}
+		}
+	}
+}
+
+int main() {
+	cin >> M >> N;
+
+	for (int i = 0; i < M; i++) {
+		for (int j = 0; j < N; j++) {
+			scanf("%1d", &arr[i][j]);
+		}
+	}
+	search(0, 0);
+
+	cout << countArr[M - 1][N - 1];
+}

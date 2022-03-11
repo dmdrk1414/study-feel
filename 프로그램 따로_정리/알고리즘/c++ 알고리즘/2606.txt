@@ -1,0 +1,38 @@
+#include<iostream>
+#include<queue>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int check[102];
+int map[102][102];
+queue<int> q;
+int c = 0;
+
+int main() {
+	int comNum, arrSize;
+	cin >> comNum >> arrSize;
+
+	for (int i = 0; i < arrSize; i++) { // 링크 배열 생성
+		int first, second;
+		cin >> first >> second;
+		map[first][second] = 1;
+		map[second][first] = 1;
+	}
+
+	q.push(1);
+	check[1] = true;
+	while (!q.empty()) {
+		int num = q.front(); // map y축 순환
+		q.pop();
+		for (int i = 1; i <= comNum; i++) { // map x축 순환
+			// 1과 연결되는 곳을 찾는다.
+			if (!check[i] && map[num][i] == 1) {
+				q.push(i);
+				check[i] = true;
+				c++;
+			}
+		}
+	}
+	cout << c;
+}

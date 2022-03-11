@@ -1,0 +1,32 @@
+//#include <stdio.h>
+//#include <string.h>
+#include<iostream>
+#include<algorithm>
+using namespace std;
+
+class Student {
+public:
+	string name;
+	int score;
+	Student(string name, int score) {
+		this->name = name;
+		this->score = score;
+	}
+	// 정렬 기준은 "점수가 작은 순서"
+	bool operator <(Student &student) { //다른 학생들과 비교를 할때
+		return this->score < student.score; // 내 점수가 다른사람들에 비해 낮다면?
+	}
+};
+int main() {
+	Student students[] = {
+			Student("응 가", 90),
+			Student("가 응 ", 95),
+			Student("dmdrk1414", 91),
+			Student("dmdrk ", 99),
+			Student("dmdrk1414 ", 98)
+	};
+	sort(students, students + 5);
+	for(int i = 0 ; i < 5 ; i++){
+		cout << students[i].name << " " << students[i].score << endl;
+	}
+}

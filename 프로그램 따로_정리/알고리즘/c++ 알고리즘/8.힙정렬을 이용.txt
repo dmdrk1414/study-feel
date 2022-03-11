@@ -1,0 +1,49 @@
+#include <stdio.h>
+
+int number = 9;
+int heap[9] = {7, 6, 5, 8, 3, 5, 9, 1, 6};
+
+int main(void) {
+	// 힙을 구성
+	for(int i = 1; i < number; i++) {
+		int childIndex = i;
+		do {
+			int parentIndex = (childIndex - 1) / 2; // ( 부모의 인덱스는 = 자식의 -1 )  /2 이다.
+			if(heap[parentIndex] < heap[childIndex]) {
+				int temp = heap[parentIndex];
+				heap[parentIndex] = heap[childIndex];
+				heap[childIndex] = temp;
+			}
+			childIndex = parentIndex;
+		} while (childIndex != 0);
+	}
+
+	// 크기를 줄여가며 반복적으로 힙을 구성
+	for (int i = number - 1; i >= 0; i--) {
+		int temp = heap[0];
+		heap[0] = heap[i];
+		heap[i] = temp;
+		int parentIndex = 0;
+		int childIndex = 1;
+
+		// 힙정렬 힙구조를 만들것에서 힙소파이 알고리즘을 사용하여 힙정렬을 구현한다.
+		do {
+			childIndex = 2 * parentIndex + 1;
+			// 자식 중에 더 큰 값을 찾기
+			if(childIndex < i - 1 && heap[childIndex] < heap[childIndex + 1]) {
+				childIndex++;
+			}
+			// 루트보다 자식이 크다면 교환
+			if(childIndex < i && heap[parentIndex] < heap[childIndex]) {
+				temp = heap[parentIndex];
+				heap[parentIndex] = heap[childIndex];
+				heap[childIndex] = temp;
+			}
+			parentIndex = childIndex;
+		} while (childIndex < i);
+	}
+	// 결과 출력
+	for(int i = 0; i < number; i++) {
+		printf("%d ", heap[i]);
+	}
+}

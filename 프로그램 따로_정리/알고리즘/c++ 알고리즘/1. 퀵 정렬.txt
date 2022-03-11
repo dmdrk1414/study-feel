@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+void swap(int *array, int index, int stand) {
+	int temp = array[index];
+	array[index] = array[stand];
+	array[stand] = temp;
+}
+
+void printAll(int *array, int number) {
+	for (int i = 0; i < number; i++) {
+		printf("%d\n", array[i]);
+	}
+}
+
+void quickSort(int *array, int start, int end) {
+	if (start >= end) {
+		return;
+	}
+
+	int pevot = start; // key is first 원소
+	int left = start + 1, right = end, temp;
+
+	while (left <= right) {
+
+		// left == 왼쪽부터 큰순으로
+		while (left <= end && array[left] <= array[pevot]) {
+			left++;
+		}
+
+		// right == 오른쪽은 작은순으로
+		while (right > start && array[right] >= array[pevot]) {
+			right--;
+		}
+
+		if (left > right) { // 스왑 조건
+			temp = array[right];
+			array[right] = array[pevot];
+			array[pevot] = temp;
+		} else {
+			temp = array[left];
+			array[left] = array[right];
+			array[right] = temp;
+		}
+	}
+	quickSort(array, start, right - 1);
+	quickSort(array, right + 1, end);
+}
+
+int main() {
+	int array[] = { 1, 10, 5, 8, 7, 6, 4, 3, 2, 9 };
+	int size = sizeof array / sizeof array[0];
+
+	quickSort(array, 0, size - 1);
+	for(int i = 0 ; i < 10 ; i++){
+		printf("%d", array[i]);
+	}
+}

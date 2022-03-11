@@ -1,0 +1,36 @@
+//#include <stdio.h>
+//#include <string.h>
+#include<iostream>
+#include<algorithm>
+#include<vector>
+using namespace std;
+
+bool compare(pair<string, pair<int, int> > a, pair<string, pair<int, int>> b){
+	if(a.second.first == b.second.first){ // 성적이 비슷하면?
+		return a.second.second > b.second.second; // 생일이 빠른 사람이 우선순위
+	} else {
+		return a.second.first > b.second.first;
+	}
+}
+
+int main() {
+	vector<pair<string, pair<int, int>>> v;
+	v.push_back(pair<string, pair<int, int>>("박 승 찬", pair<int, int>(90,19960415)));
+	v.push_back(pair<string, pair<int, int>>("이 태 일", pair<int, int>(97,19930518)));
+	v.push_back(pair<string, pair<int, int>>("박 한 울", pair<int, int>(95,19930203)));
+	v.push_back(pair<string, pair<int, int>>("이 상 욱", pair<int, int>(90,19921207)));
+	v.push_back(pair<string, pair<int, int>>("강 종 구 ", pair<int, int>(88,19900302)));
+
+	sort(v.begin(), v.end(), compare);
+
+	for (int i = 0; i < v.size(); i++) {
+		cout << v[i].first << " " << v[i].second.first<< endl;
+	}
+}
+
+
+이 태 일 97
+박 한 울 95
+박 승 찬 90
+이 상 욱 90
+강 종 구 88
