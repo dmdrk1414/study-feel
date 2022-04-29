@@ -1,0 +1,38 @@
+#include<stdio.h>
+#include<iostream>
+#include<queue>
+#include<cstring>
+#define SIZE 1001
+
+using namespace std;
+
+int N, M; // N: 숫자 갯수 , M: 간선의 갯수
+queue<pair<int, int>> q;
+int check[SIZE] = { 0, };
+int map[SIZE][SIZE] = { { 0, } };
+vector<int> count;
+
+int main() {
+	fill(map[0], map[0] + SIZE * SIZE, 0);
+	fill(check, check + SIZE, 0);
+
+	cin >> N >> M; // N : 숫자의 갯수 , M : 간선의 갯수;
+	for (int i = 0; i < M; i++) {
+		int input_1, input_2;
+		cin >> input_1 >> input_2;
+		map[input_1][input_2] = 1;
+		map[input_2][input_1] = 1;
+	}
+
+	for (int i = 1; i <= N; i++) {
+		if (map[1][i] == 1)
+			count.push_back(map[1][i]);
+	}
+	cout << count.size();
+//	for (int i = 1; i <= N; i++) {
+//		for (int j = 0; j < N; j++) {
+//			cout << map[i][j];
+//		}
+//		cout << "" << endl;
+//	}
+}

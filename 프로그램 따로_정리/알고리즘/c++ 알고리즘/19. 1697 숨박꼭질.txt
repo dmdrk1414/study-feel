@@ -1,0 +1,43 @@
+#include<iostream>
+#include<stdint.h>
+#include<queue>
+#include<vector>
+#include<algorithm>
+using namespace std;
+#define ARRAY_SIZE 1000001
+queue<int> q;
+int subin = 0, K = 0;
+int map[ARRAY_SIZE];
+int check[ARRAY_SIZE];
+
+int main() {
+	fill(map, map + ARRAY_SIZE, 0);
+	fill(check, check + ARRAY_SIZE, 0);
+	cin >> subin >> K;
+	q.push(subin);
+	while (!q.empty()) {
+		int Nsubin = q.front();
+		if (Nsubin == K)
+			break;
+		q.pop();
+
+		if (Nsubin + 1 < ARRAY_SIZE && Nsubin + 1 >= 0 && !check[Nsubin + 1]) {
+			check[Nsubin + 1] = true;
+			q.push(Nsubin + 1);
+			map[Nsubin + 1] = map[Nsubin] + 1;
+		}
+		if (Nsubin - 1 >= 0 && Nsubin - 1 < ARRAY_SIZE && !check[Nsubin - 1]) {
+			check[Nsubin - 1] = true;
+			q.push(Nsubin - 1);
+			map[Nsubin - 1] = map[Nsubin] + 1;
+		}
+		if (Nsubin * 2 < ARRAY_SIZE && Nsubin * 2 >= 0 && !check[Nsubin * 2]) {
+			check[Nsubin * 2] = true;
+			q.push(Nsubin * 2);
+			map[Nsubin * 2] = map[Nsubin] + 1;
+		}
+	}
+
+	cout << map[K];
+	return 0;
+}

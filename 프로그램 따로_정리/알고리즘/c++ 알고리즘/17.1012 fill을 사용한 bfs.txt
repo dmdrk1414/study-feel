@@ -1,0 +1,75 @@
+#include<iostream>
+#include<stdio.h>
+#include<queue>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+int cx[4] = { -1, 0, 1, 0 }, cy[4] = { 0, -1, 0, 1 }; // 왼 상 오 하
+int testCase;
+vector<int> caseNumber;
+
+int main() {
+	cin >> testCase;
+	for (int i = 0; i < testCase; i++) { // 테스트 케이스 대로 반복
+		int M, N, inputSize; // 가로길이 : M, 세로길이 : N, inputSize : 입력받는 길이;
+		queue<pair<int, int>> q;
+		cin >> M >> N >> inputSize;
+		int map[N][M] = { 0, };
+		int check[N][M] = { 0, };
+		vector<int> countArr;
+
+		fill(map[0], map[0] + (N * M), 0);
+		fill(check[0], check[0] + (N * M), 0);
+		// for문을 사용해서 map에 배추가 있는곳에 1을 넣기;
+		for (int j = 0; j < inputSize; j++) {
+			int x;
+			int y;
+			cin >> x >> y;
+			map[y][x] = 1;
+		}
+
+		// for 문 2개을 이용해서 지렁이가 투입되는 곳을 찾는다.
+		for (int y = 0; y < N; y++) { // 0  y길이
+			for (int x = 0; x < M; x++) { // 0   x길이
+				if (map[y][x] == 1 && check[y][x] != 1) {
+//					cout << "x : " << x << " " << "y : " << y << endl;
+					q.push(make_pair(x, y)); // 지렁이를 투입하는 시점을 push한다.
+					check[y][x] = 1;
+					int c = 1;
+
+					while (!q.empty()) {
+						int nX = q.front().first; // 0
+						int nY = q.front().second;  // 0
+//						cout << "nX : " << nX << "  " << "nY : " << nY << endl;
+						q.pop();
+						for (int index = 0; index < 4; index++) { // 왼 윗 오 아래
+							int tempX = nX + cx[index]; // 1
+							int tempY = nY + cy[index]; // 0 (1,0)
+//							cout << "tempX : " << tempX << " " << "tempY : "
+//									<< tempY << endl;
+							if (tempX >= 0 && tempX < M && tempY >= 0
+									&& tempY < N) {
+								if (check[tempY][tempX] != 1
+										&& map[tempY][tempX] == 1) {
+//									cout << "tempX : " << tempX << " "
+//											<< "tempY : " << tempY << endl;
+									q.push(make_pair(tempX, tempY));
+									check[tempY][tempX] = 1; // 체크를 해주는 곳
+									c++;
+								}
+							}
+						}
+					}
+					countArr.push_back(c);
+//					cout << " countArr.push_back(c)" << " " << c << endl; // 여기서 c의 숫자는 의미가 없다. c가 몇번 푸쉬되는가? 그것이 중요하다.
+//					cout << "-----------------" << endl;
+				}
+			}
+		}
+		caseNumber.push_back(countArr.size());
+	}
+	for (int i = 0; i < testCase; i++) {
+		cout << caseNumber[i] << endl;
+	}
+}
