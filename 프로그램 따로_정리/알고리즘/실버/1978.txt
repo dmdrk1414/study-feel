@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int input = sc.nextInt();
+        int[] arr = new int[input];
+
+        for (int i = 0; i < input; i++) {
+            int n = sc.nextInt();
+            arr[i] = n;
+        }
+//        System.out.println("Arrays.toString(arr) = " + Arrays.toString(arr));
+
+        int cnt = 0;
+        for (int value : arr) {
+            boolean is = true;
+            if (value == 1) {
+                continue;
+            }
+
+            for (int i = 2; i < value; i++) {
+                if ((value % i) == 0) {
+                    is = false;
+                    break;
+                }
+            }
+            if (is) {
+                cnt++;
+            }
+        }
+        System.out.println(cnt);
+    }
+}
